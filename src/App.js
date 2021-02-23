@@ -22,8 +22,6 @@ function App() {
   })
 
   const increaseBtnClick = function () {
-    console.log('the increase button was clicked');
-
     // in redux we dispatch the action
     dispatch({
       // this is sent to the action of the click count
@@ -33,8 +31,6 @@ function App() {
   };
 
   const decreaseBtnClick = function () {
-    console.log('decrease button click');
-
     dispatch({
       type: 'DECREASE_CLICK_COUNT'
     })
