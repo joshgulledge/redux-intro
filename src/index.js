@@ -10,10 +10,25 @@ import { Provider } from 'react-redux';
 // this is called a reducer
 // returns the value of the state
 const clickCount = function (state = 0, action) {
+  console.log('clickCount action:', action);
+
+  if(action.type === 'INCREASE_CLICK_COUNT') return state + 1;
+
+  if (action.type === 'DECREASE_CLICK_COUNT' ) return state - 1;
+
   return state;
 };
 
 const elementList = function (state = ['Hydrogen', 'Helium'], action) {
+
+  switch(action.type) {
+    case 'ADD_ELEMENT':
+      console.log(action);
+      // state.push(action.payload);
+      // make a clone
+      return [...state, action.payload];
+  };
+
   return state;
 };
 
