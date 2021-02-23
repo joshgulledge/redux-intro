@@ -3,6 +3,9 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 
+import ElementForm from './ElementForm/elementForm';
+import ElementList from './ElementList/elementList';
+
 
 function App() {
   // local state
@@ -11,19 +14,13 @@ function App() {
   // gives us acess to the redux dispatch() function
   const dispatch = useDispatch();
 
-  // track new element
-  const[newElement, setNewElement] = useState('');
+  
 
   const clickCount = useSelector((store) => { 
     // console.log('store is: ', store);
     return store.clickCount; 
   })
   // console.log('clickCount is: ', clickCount);
-
-  const elements = useSelector((store) => {
-    // console.log(store.elementList);
-    return store.elementList;
-  })
 
   const increaseBtnClick = function () {
     // in redux we dispatch the action
@@ -47,17 +44,7 @@ function App() {
     });
   };
 
-  const onAddElement = function (e) {
-    e.preventDefault(); 
-
-    dispatch({
-      type: 'ADD_ELEMENT',
-      payload: newElement
-    });
-    
-    // clears out the field
-    setNewElement('');
-  }
+  
 
   return (
     <div>
@@ -69,26 +56,17 @@ function App() {
       <button onClick={decreaseBtnClick}>decrease Count</button>
 
       <h2>Table of Elements</h2>
-      <ul>
-        {elements.map((value, index) => {
+
+        <ElementList />
+        {/*<ul> {elements.map((value, index) => {
           return(
             <li key={index}> {value} </li>
           )
-        })}
-      </ul>
+        })} </ul> */}
 
-      <form onSubmit={onAddElement}>
+      <ElementForm />
 
-        <h3> Add a new Element</h3>
-
-        <input type="text" 
-        placeholder="Element Name" 
-        value={newElement} 
-        onChange={(e) => setNewElement(e.target.value)}/>
-
-        <button>Add Element</button>
-      </form>
-
+      
       <button onClick={addElement}>👽 Alenioum 👽 </button>
     </div>
   );
